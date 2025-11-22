@@ -16,8 +16,8 @@ import step02Back from './images/step02Back.svg'
 import step03Front from './images/step03Front.svg'
 import step03Back from './images/step03Back.svg'
 import { InfiniteSlider } from '@/components/motion/infinite-slider'
-import { AnimatePresence, motion } from 'motion/react'
-
+import { AnimatePresence, motion, Variants } from 'motion/react'
+const AUTOPLAY_MS = 2400
 const content = [
   {
     title: 'أنشئ منتجات تبرع مخصصة في دقائق',
@@ -46,17 +46,17 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   richText,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const { setHeaderTheme } = useHeaderTheme()
+  // const { setHeaderTheme } = useHeaderTheme()
 
-  useEffect(() => {
-    setHeaderTheme('light')
-  })
+  // useEffect(() => {
+  //   setHeaderTheme('light')
+  // })
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % content.length)
-    }, 5000)
+    }, AUTOPLAY_MS)
     return () => clearInterval(interval)
-  }, [currentIndex])
+  }, [currentIndex, AUTOPLAY_MS])
 
   // useEffect(() => {
   //   setCurrentIndex(0)
@@ -115,21 +115,18 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           )}
         </div>
         <div className="py-site h-full w-full basis-1/2 flex-col justify-center select-none lg:flex lg:p-0">
-          <AnimatePresence mode="wait">
-            <div className="relative mx-auto aspect-square h-full w-full max-w-[500px] xl:h-[500px]">
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={currentIndex}
+              variants={containerVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="relative mx-auto aspect-square h-full w-full max-w-[500px] xl:h-[500px]"
+            >
               <motion.div
                 key={`${currentIndex}_front`}
-                initial={{ x: 100, opacity: 0 }}
-                animate={{
-                  x: 0,
-                  opacity: 1,
-                  transition: { duration: 0.4, delay: 0.2, ease: 'easeInOut' },
-                }}
-                exit={{
-                  x: 100,
-                  opacity: 0,
-                  transition: { duration: 0.4, delay: 0.2, ease: 'easeInOut' },
-                }}
+                variants={imageVariants}
                 className="absolute inset-0 z-10 aspect-square h-auto w-full"
               >
                 <Image
@@ -139,12 +136,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
                   priority
                 />
               </motion.div>
-              <motion.div
-                key={`${currentIndex}_back`}
-                initial={{ x: 100, opacity: 0 }}
-                animate={{ x: 0, opacity: 1, transition: { duration: 0.4, ease: 'easeInOut' } }}
-                exit={{ x: 100, opacity: 0, transition: { duration: 0.4, ease: 'easeInOut' } }}
-              >
+              <motion.div key={`${currentIndex}_back`} variants={imageVariants}>
                 <Image
                   src={content[currentIndex]?.backImage}
                   alt={content[currentIndex]?.title || ''}
@@ -152,7 +144,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
                   priority
                 />
               </motion.div>
-            </div>
+            </motion.div>
           </AnimatePresence>
           <AnimatePresence mode="wait">
             <motion.div
@@ -181,4 +173,39 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
       </div>
     </div>
   )
+}
+
+const containerVariants: Variants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: -1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: 1,
+      delay: 0.8,
+    },
+  },
+}
+
+const imageVariants: Variants = {
+  initial: { x: 100, opacity: 0 },
+  animate: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] },
+  },
+  exit: {
+    x: -100,
+    opacity: 0,
+    transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] },
+  },
 }
