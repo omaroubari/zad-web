@@ -191,7 +191,7 @@ const containerVariants: Variants = {
     transition: {
       staggerChildren: 0.2,
       staggerDirection: 1,
-      delay: 0.8,
+      delay: 1,
     },
   },
 }
