@@ -23,6 +23,7 @@ export const Media: CollectionConfig = {
     update: authenticated,
   },
   fields: [
+    { name: 'prefix', type: 'text', hidden: true },
     {
       name: 'alt',
       type: 'text',
