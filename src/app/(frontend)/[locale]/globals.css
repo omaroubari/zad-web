@@ -102,7 +102,7 @@ html[data-theme='light'] {
   --primary-foreground: var(--zad-gold);
   /*gold*/
   --secondary: var(--zad-gold);
-  --secondary-foreground: var(--zad-green);
+  --secondary-foreground: theme(--color-teal-950);
   /*beige*/
   --muted: var(--zad-beige-light);
   --muted-foreground: var(--foreground);

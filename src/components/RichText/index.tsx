@@ -9,6 +9,7 @@ import {
   JSXConvertersFunction,
   LinkJSXConverter,
   RichText as ConvertRichText,
+  JSXConverters,
 } from '@payloadcms/richtext-lexical/react'
 
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
@@ -59,13 +60,22 @@ type Props = {
   data: DefaultTypedEditorState
   enableGutter?: boolean
   enableProse?: boolean
+  disableContainer?: boolean
+  converters?: JSXConvertersFunction<NodeTypes>
 } & React.HTMLAttributes<HTMLDivElement>
 
 export default function RichText(props: Props) {
-  const { className, enableProse = true, enableGutter = true, ...rest } = props
+  const {
+    className,
+    enableProse = true,
+    enableGutter = true,
+    disableContainer = false,
+    ...rest
+  } = props
   return (
     <ConvertRichText
       converters={jsxConverters}
+      disableContainer={disableContainer}
       className={cn(
         'payload-richtext',
         {

@@ -17,6 +17,7 @@ import step03Front from './images/step03Front.svg'
 import step03Back from './images/step03Back.svg'
 import { InfiniteSlider } from '@/components/motion/infinite-slider'
 import { AnimatePresence, motion, Variants } from 'motion/react'
+import { itemsFling, motionConverters } from '@/components/RichText/motion-converters'
 const AUTOPLAY_MS = 2400
 const content = [
   {
@@ -63,31 +64,40 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   // }, [])
 
   return (
-    <div className="bg-background text-foreground">
-      <div className="section pb-md lg:gap-site relative flex min-h-[calc(100vh-var(--header-height))] flex-col items-center justify-center overflow-y-hidden lg:h-[calc(100vh-var(--header-height))] lg:flex-row lg:items-start">
-        <div className="gap-md mt-site flex h-full w-full basis-1/2 flex-col items-start overflow-hidden lg:mt-0 lg:justify-center">
+    <div className="bg-background">
+      <motion.div
+        variants={containerVariants}
+        initial="initial"
+        whileInView="animate"
+        className="section pb-md lg:gap-site relative flex min-h-[calc(100vh-var(--header-height))] flex-col items-center justify-center overflow-y-hidden lg:h-[calc(100vh-var(--header-height))] lg:flex-row lg:items-center"
+      >
+        <motion.div className="gap-lg mt-site flex h-full w-full basis-1/2 flex-col items-start overflow-hidden lg:mt-0 lg:max-h-[790px] lg:justify-center lg:py-(--header-height)">
           {richText && (
-            <RichText
-              className="prose-p:text-body-large max-w-3xl text-balance"
-              data={richText}
-              enableGutter={false}
-            />
+            <motion.div className="prose-p:text-body-large prose prose-stone max-w-3xl text-balance">
+              <RichText
+                disableContainer={true}
+                converters={motionConverters}
+                data={richText}
+                enableGutter={false}
+              />
+            </motion.div>
           )}
-          <div className="flex flex-col gap-4">
+          <motion.div className="flex flex-col gap-4">
             {Array.isArray(links) && links.length > 0 && (
-              <ul className="flex gap-4 max-md:w-full md:justify-center">
+              <motion.ul className="flex gap-4 max-md:w-full md:justify-center">
                 {links.map(({ link }, i) => {
                   return (
-                    <li key={i} className="w-full">
+                    <motion.li key={i} variants={itemsFling} className="w-full">
                       <CMSLink
                         {...link}
                         size="lg"
-                        className="not-dark:bg-zad-green not-dark:hover:bg-zad-green/90 not-dark:text-white max-md:w-full"
+                        className="max-md:w-full"
+                        appearance="secondary"
                       />
-                    </li>
+                    </motion.li>
                   )
                 })}
-              </ul>
+              </motion.ul>
             )}
             {linkText && (
               <p className="text-foreground-tertiary text-sm font-medium">
@@ -97,24 +107,24 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
                 {linkText}
               </p>
             )}
-          </div>
+          </motion.div>
           {logos && (
-            <div className="relative w-full">
+            <motion.div variants={itemsFling} className="relative mt-auto w-full">
               <div className="from-background absolute top-0 left-0 z-10 h-full w-12 bg-gradient-to-r to-transparent" />
               <div className="from-background absolute top-0 right-0 z-10 h-full w-12 bg-gradient-to-l to-transparent" />
               <InfiniteSlider gap={48} speed={56}>
                 {logos.map((item, index) => (
                   <Media
                     key={index}
-                    imgClassName={cn('h-10 w-auto opacity-50 dark:invert')}
+                    imgClassName={cn('h-14 w-auto opacity-50 dark:invert')}
                     resource={item}
                   />
                 ))}
               </InfiniteSlider>
-            </div>
+            </motion.div>
           )}
-        </div>
-        <div className="py-site h-full w-full basis-1/2 flex-col justify-center select-none lg:flex lg:p-0">
+        </motion.div>
+        <motion.div className="py-site _h-full w-full basis-1/2 flex-col justify-center select-none lg:flex lg:p-0">
           <AnimatePresence mode="popLayout">
             <motion.div
               key={currentIndex}
@@ -122,23 +132,23 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
               initial="initial"
               animate="animate"
               exit="exit"
-              className="relative mx-auto aspect-square h-full w-full max-w-[500px] xl:h-[500px]"
+              className="relative isolate mx-auto aspect-square h-full w-full max-w-[500px] xl:h-[500px]"
             >
-              <motion.div
-                key={`${currentIndex}_front`}
-                variants={imageVariants}
-                className="absolute inset-0 z-10 aspect-square h-auto w-full"
-              >
-                <Image
-                  src={content[currentIndex]?.frontImage}
-                  alt={content[currentIndex]?.title || ''}
-                  className="aspect-square h-auto w-full object-contain"
-                  priority
-                />
-              </motion.div>
               <motion.div key={`${currentIndex}_back`} variants={imageVariants}>
                 <Image
                   src={content[currentIndex]?.backImage}
+                  alt={content[currentIndex]?.title || ''}
+                  className="z-0 aspect-square h-auto w-full object-contain"
+                  priority
+                />
+              </motion.div>
+              <motion.div
+                key={`${currentIndex}_front`}
+                variants={imageVariants}
+                className="absolute inset-0 z-1 aspect-square h-auto w-full"
+              >
+                <Image
+                  src={content[currentIndex]?.frontImage}
                   alt={content[currentIndex]?.title || ''}
                   className="aspect-square h-auto w-full object-contain"
                   priority
@@ -169,8 +179,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           {/* {media && typeof media === 'object' && (
             <Media imgClassName="z-10 object-cover" priority resource={media} />
             )} */}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 }
@@ -183,7 +193,7 @@ const containerVariants: Variants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.2,
-      staggerDirection: -1,
+      staggerDirection: 1,
     },
   },
   exit: {
@@ -193,6 +203,20 @@ const containerVariants: Variants = {
       staggerDirection: 1,
       delay: 1,
     },
+  },
+}
+
+const itemVariants: Variants = {
+  initial: { x: 100, opacity: 0 },
+  animate: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] },
+  },
+  exit: {
+    x: -100,
+    opacity: 0,
+    transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] },
   },
 }
 

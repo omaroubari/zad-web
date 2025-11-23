@@ -23,7 +23,7 @@ export const Logo = (props: Props) => {
       fetchPriority={priority}
       decoding="async"
       className={clsx('h-8 w-full max-w-[9.375rem]', className)}
-      src="/zad-logo-gold.svg"
+      src="/zad-logo-green.svg"
     />
   )
 }
