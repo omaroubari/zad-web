@@ -1,51 +1,43 @@
 import React from 'react'
-import { cn } from '@/utilities/ui'
+
 import RichText from '@/components/RichText'
 import { Icon } from '@iconify-icon/react'
 import * as motion from 'motion/react-client'
-import { CMSLink } from '../../../components/Link'
-import { Media } from '@/components/Media'
 import type { ContentBlock } from '@/payload-types'
 import { Variants } from 'motion/react'
 export const Content03: React.FC<ContentBlock> = (props) => {
   const { richText, list } = props
 
   return (
-    <div className="bg-background-subtle relative">
+    <div className="bg-background relative">
       <motion.div
+        className="bg-background-neutral p-site"
         initial="initial"
         whileInView="animate"
-        viewport={{ amount: 0.25 }}
         variants={{
           initial: {
-            padding: '0px',
+            clipPath: `inset(0rem round 0px)`,
           },
           animate: {
-            padding: 'var(--spacing-site)',
-            transition: { duration: 0.5, ease: 'easeInOut' },
+            clipPath: `inset(var(--spacing-site) round 24px)`,
+            transition: { duration: 0.4, ease: 'easeInOut' },
           },
         }}
       >
-        <motion.div
-          variants={variants}
-          className="p-site gap-md bg-background flex flex-col items-center overflow-hidden"
-        >
+        <div className="gap-md section py-site flex flex-col items-center overflow-hidden">
           {richText && (
-            <RichText
-              className="mt-site mx-auto text-center"
-              data={richText}
-              enableGutter={false}
-            />
+            <RichText className="mx-auto text-center" data={richText} enableGutter={false} />
           )}
           {list && (
             <div className="gap-md grid w-full max-w-[calc(100vw-(--spacing-(site)*4))] grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
               {list.map((item) => (
                 <div key={item.id} className="gap-md flex flex-col items-center rounded-lg">
                   {item.icon && (
-                    <div className="bg-zad-beige inline-flex w-fit rounded-full p-3">
+                    <div className="bg-primary inline-flex w-fit rounded-full p-5">
                       <Icon
                         icon={`ri:${item.icon}`}
-                        className="text-zad-green text-3xl leading-none"
+                        className="text-primary-foreground size-10 leading-none"
+                        height="none"
                       />
                     </div>
                   )}
@@ -65,16 +57,8 @@ export const Content03: React.FC<ContentBlock> = (props) => {
               ))}
             </div>
           )}
-        </motion.div>
+        </div>
       </motion.div>
     </div>
   )
-}
-
-const variants: Variants = {
-  initial: { borderRadius: '0px' },
-  animate: {
-    borderRadius: '32px',
-    transition: { type: 'spring', duration: 0.5 },
-  },
 }

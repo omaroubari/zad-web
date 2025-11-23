@@ -166,7 +166,7 @@ export const FormBlock: React.FC<
                   type="submit"
                   variant="default"
                   size="lg"
-                  className="mt-lg mx-auto text-center text-stone-950"
+                  className="mt-lg mx-auto"
                 >
                   {submitButtonLabel}
                 </Button>

@@ -1,11 +1,13 @@
 import RichText from '@/components/RichText'
 import { PricingBlock as PricingBlockProps } from '@/payload-types'
 import { Icon } from '@iconify-icon/react/dist/iconify.mjs'
+import Image from 'next/image'
+import logo from 'public/zad-logo-gold.svg'
 
 export const PricingBlock: React.FC<PricingBlockProps> = (props) => {
   const { tag, richText, baseFeatures, additionalFeatures } = props
   return (
-    <div className="bg-background-subtle w-full">
+    <div className="bg-background w-full">
       <div className="section gap-md py-site flex flex-col items-center">
         {richText && (
           <div className="gap-sm flex flex-col items-center">
@@ -25,7 +27,7 @@ export const PricingBlock: React.FC<PricingBlockProps> = (props) => {
                   {baseFeatures.heading}
                 </h3>
                 <RichText
-                  className="prose-p:text-body-large m-0"
+                  className="prose-p:text-body-main m-0"
                   data={baseFeatures.content as any}
                   enableGutter={false}
                 />
@@ -55,25 +57,25 @@ export const PricingBlock: React.FC<PricingBlockProps> = (props) => {
             </div>
           )}
           {additionalFeatures && (
-            <div className="space-y-md bg-background-inverted p-lg pt-md w-full rounded-3xl">
-              <div className="flex flex-col">
-                <h3 className="text-h5 me-lg text-background-subtle font-bold">
+            <div className="space-y-md bg-background-inverted p-lg pt-md relative isolate w-full overflow-clip rounded-3xl">
+              <div className="z-1 flex flex-col">
+                <h3 className="text-h5 me-lg text-inverted-primary font-bold">
                   {additionalFeatures.heading}
                 </h3>
                 <RichText
-                  className="prose-p:text-body-large prose-invert m-0"
+                  className="prose-p:text-body-main prose-invert m-0"
                   data={additionalFeatures.content as any}
                   enableGutter={false}
                 />
               </div>
-              <ul className="gap-sm grid w-full grid-cols-1 sm:grid-flow-row sm:grid-cols-2 lg:grid-cols-1">
+              <ul className="gap-sm z-1 grid w-full grid-cols-1 sm:grid-flow-row sm:grid-cols-2 lg:grid-cols-1">
                 {additionalFeatures?.features?.map((item) => (
                   <li key={item.id} className="flex flex-row items-center gap-4 rounded-lg">
                     {item.icon && (
-                      <div className="bg-zad-beige inline-flex w-fit rounded-full p-3">
+                      <div className="bg-secondary inline-flex w-fit rounded-full p-3">
                         <Icon
                           icon={`ri:${item.icon}`}
-                          className="text-zad-green text-2xl leading-none"
+                          className="text-secondary-foreground text-2xl leading-none"
                         />
                       </div>
                     )}
@@ -90,6 +92,11 @@ export const PricingBlock: React.FC<PricingBlockProps> = (props) => {
                   </li>
                 ))}
               </ul>
+              <Image
+                src={logo}
+                alt="logo"
+                className="absolute end-[-25%] bottom-[-10%] z-0 h-auto w-[90%] opacity-10"
+              />
             </div>
           )}
         </div>

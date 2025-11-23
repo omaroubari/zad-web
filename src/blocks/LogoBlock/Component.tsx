@@ -32,7 +32,7 @@ export const LogoBlock: React.FC<ExtendedLogoBlockProps> = (props) => {
   } = props
 
   return (
-    <div className="bg-zad-green w-full" data-theme="dark">
+    <div className="bg-background-inverted w-full">
       <div className={cn('flex flex-col', className)}>
         {caption && !disableCaption && (
           <div
@@ -45,7 +45,7 @@ export const LogoBlock: React.FC<ExtendedLogoBlockProps> = (props) => {
             )}
           >
             <RichText
-              className="prose-headings:text-white prose-p:text-white/50 m-0"
+              className="prose-headings:text-inverted-primary prose-p:text-inverted-secondary m-0"
               data={caption}
               enableGutter={false}
             />

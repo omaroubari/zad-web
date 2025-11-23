@@ -11,11 +11,15 @@ import { Media } from '../../components/Media'
 export const StatsBlock: React.FC<StatsBlockProps> = (props) => {
   const { caption, list } = props
   return (
-    <div className="bg-background-subtle w-full">
+    <div className="bg-background-inverted w-full">
       <div className="flex flex-col">
         {caption && (
           <div className="section pt-site w-full">
-            <RichText className="m-0 text-white" data={caption} enableGutter={false} />
+            <RichText
+              className="prose-headings:text-inverted-primary prose-p:text-inverted-secondary m-0"
+              data={caption}
+              enableGutter={false}
+            />
           </div>
         )}
         {list && (
@@ -30,14 +34,16 @@ export const StatsBlock: React.FC<StatsBlockProps> = (props) => {
               <div key={item.id} className="flex flex-col items-start">
                 <h3
                   className={cn(
-                    'text-start font-bold text-(color:--color-zad-gold)',
+                    'text-start font-bold text-(color:--color-secondary)',
                     list.length >= 4 ? 'text-h4' : 'text-h3',
                   )}
                 >
                   {item.number}
                 </h3>
                 {item.description && (
-                  <p className="text-body-large text-zad-gold text-start">{item.description}</p>
+                  <p className="text-body-large text-start text-(color:--color-inverted-secondary)">
+                    {item.description}
+                  </p>
                 )}
               </div>
             ))}

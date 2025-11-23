@@ -11,7 +11,7 @@ export const Content04: React.FC<ContentBlock> = (props) => {
   const { richText, list } = props
 
   return (
-    <div className="bg-background w-full">
+    <div className="bg-background-neutral w-full">
       <div className="section gap-md py-site flex flex-col">
         {richText && (
           <div className="pt-site w-full">
@@ -23,7 +23,7 @@ export const Content04: React.FC<ContentBlock> = (props) => {
           </div>
         )}
         {list && (
-          <div className="gap-lg flex w-full flex-col">
+          <div className="gap-lg py-lg flex w-full flex-col">
             {list.map((item) => (
               <div
                 key={item.id}

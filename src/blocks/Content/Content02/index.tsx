@@ -6,7 +6,6 @@ import RichText from '@/components/RichText'
 
 import type { ContentBlock } from '@/payload-types'
 
-import { CMSLink } from '../../../components/Link'
 import { Media } from '@/components/Media'
 
 export const Content02: React.FC<ContentBlock> = (props) => {
@@ -16,7 +15,7 @@ export const Content02: React.FC<ContentBlock> = (props) => {
   )
 
   return (
-    <div className="bg-background w-full">
+    <div className="bg-background-neutral w-full">
       <div className="flex flex-col">
         {richText && (
           <div className="section pt-site w-full">
@@ -47,14 +46,14 @@ export const Content02: React.FC<ContentBlock> = (props) => {
                   type="button"
                   key={item.id}
                   className={cn(
-                    'flex w-full flex-col items-start gap-2 rounded-3xl p-6 text-start',
-                    activeAccordionId === item.id && 'bg-background-subtle',
+                    'text-foreground-primary flex w-full flex-col items-start gap-2 rounded-3xl p-6 text-start transition-colors',
+                    activeAccordionId === item.id &&
+                      'bg-primary text-primary-foreground [&_p]:text-inverted-secondary',
                   )}
+                  data-active={activeAccordionId === item.id}
                   onClick={() => setActiveAccordionId(String(item.id))}
                 >
-                  <h3 className="text-foreground-primary text-(length:--text-body-large) font-bold">
-                    {item.heading}
-                  </h3>
+                  <h3 className="text-(length:--text-body-large) font-semibold">{item.heading}</h3>
                   {item.content && (
                     <RichText className="m-0" data={item.content} enableGutter={false} />
                   )}

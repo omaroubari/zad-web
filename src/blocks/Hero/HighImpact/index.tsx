@@ -63,7 +63,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   // }, [])
 
   return (
-    <div className="bg-background-subtle text-foreground" data-theme="light">
+    <div className="bg-background text-foreground">
       <div className="section pb-md lg:gap-site relative flex min-h-[calc(100vh-var(--header-height))] flex-col items-center justify-center overflow-y-hidden lg:h-[calc(100vh-var(--header-height))] lg:flex-row lg:items-start">
         <div className="gap-md mt-site flex h-full w-full basis-1/2 flex-col items-start overflow-hidden lg:mt-0 lg:justify-center">
           {richText && (
@@ -100,8 +100,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           </div>
           {logos && (
             <div className="relative w-full">
-              <div className="from-background-subtle absolute top-0 left-0 z-10 h-full w-12 bg-gradient-to-r to-transparent" />
-              <div className="from-background-subtle absolute top-0 right-0 z-10 h-full w-12 bg-gradient-to-l to-transparent" />
+              <div className="from-background absolute top-0 left-0 z-10 h-full w-12 bg-gradient-to-r to-transparent" />
+              <div className="from-background absolute top-0 right-0 z-10 h-full w-12 bg-gradient-to-l to-transparent" />
               <InfiniteSlider gap={48} speed={56}>
                 {logos.map((item, index) => (
                   <Media
@@ -158,7 +158,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
               exit={{ y: -40, rotate: 3, opacity: 0, transition: { duration: 0.25 } }}
               className="flex flex-col items-center gap-2 text-center"
             >
-              <p className="text-body-large text-zad-green-light dark:text-zad-gold font-bold">
+              <p className="text-body-large text-foreground dark:text-zad-gold font-bold">
                 {content[currentIndex]?.title}
               </p>
               <p className="text-foreground-tertiary text-body-main">

@@ -60,8 +60,8 @@ const config = {
         stone: {
           css: [
             {
-              '--tw-prose-body': '--alpha(var(--foreground) / 0.7)',
-              '--tw-prose-headings': 'var(--foreground)',
+              '--tw-prose-body': 'var(--color-foreground-secondary)',
+              '--tw-prose-headings': 'var(--color-foreground-primary)',
             },
           ],
         },

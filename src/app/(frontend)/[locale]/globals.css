@@ -82,21 +82,31 @@ html[data-theme='light'] {
   --zad-lime: hsl(79 58% 55%);
 
   --radius: 0.625rem;
-  --background: oklch(0.985 0.001 106.423);
-  --background-subtle: var(--zad-beige-light);
+  /*beige*/
+  --background: var(--zad-beige-light);
+  /*white*/
+  --background-neutral: oklch(1 0 0);
   --background-inverted: var(--zad-green);
-  --foreground: oklch(0.147 0.004 49.25);
-  --foreground-inverted: oklch(0.985 0.001 106.423);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.147 0.004 49.25);
+
+  /*base text colors*/
+  --foreground: theme(--color-teal-900);
+  /*inverted text colors*/
+  --foreground-inverted: var(--zad-beige-light);
+
+  --card: var(--zad-beige-light);
+  --card-foreground: theme(--color-teal-900);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.147 0.004 49.25);
-  --primary: oklch(0.216 0.006 56.043);
-  --primary-foreground: oklch(0.985 0.001 106.423);
-  --secondary: oklch(0.97 0.001 106.424);
-  --secondary-foreground: oklch(0.216 0.006 56.043);
-  --muted: oklch(0.97 0.001 106.424);
-  --muted-foreground: oklch(0.553 0.013 58.071);
+  /*green*/
+  --primary: var(--zad-green);
+  --primary-foreground: var(--zad-gold);
+  /*gold*/
+  --secondary: var(--zad-gold);
+  --secondary-foreground: var(--zad-green);
+  /*beige*/
+  --muted: var(--zad-beige-light);
+  --muted-foreground: var(--foreground);
+
   --accent: oklch(0.97 0.001 106.424);
   --accent-foreground: oklch(0.216 0.006 56.043);
   --destructive: oklch(0.577 0.245 27.325);
@@ -119,13 +129,6 @@ html[data-theme='light'] {
 }
 
 [data-theme='dark'] {
-  --zad-green: hsl(170 38% 25%);
-  --zad-green-light: hsl(170 38% 35%);
-  --zad-beige: hsl(53 29% 82%);
-  --zad-beige-light: hsl(53 31% 90%);
-  --zad-gold: hsl(54 42% 57%);
-  --zad-lime: hsl(79 58% 55%);
-
   --background: var(--zad-green-light);
   --background-subtle: var(--zad-green);
   --background-inverted: oklch(0.985 0.001 106.423);
@@ -200,8 +203,12 @@ html[data-theme='light'] {
   --color-foreground-secondary: --alpha(var(--foreground) / 70%);
   --color-foreground-tertiary: --alpha(var(--foreground) / 50%);
 
+  --color-inverted-primary: --alpha(var(--foreground-inverted) / 100%);
+  --color-inverted-secondary: --alpha(var(--foreground-inverted) / 70%);
+  --color-inverted-tertiary: --alpha(var(--foreground-inverted) / 50%);
+
   --color-background: var(--background);
-  --color-background-subtle: var(--background-subtle);
+  --color-background-neutral: var(--background-neutral);
   --color-background-inverted: var(--background-inverted);
   --color-foreground: var(--foreground);
   --color-foreground-inverted: var(--foreground-inverted);
